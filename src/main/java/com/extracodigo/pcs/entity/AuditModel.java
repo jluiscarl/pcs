@@ -5,9 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,27 +28,15 @@ public abstract class AuditModel implements Serializable {
 	@Column(nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
+	@Version
 	private Date updatedAt = new Date();
 
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	public Date getUpdatedAt() {
 		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-	
-	@PreUpdate
-	public void setLastUpdate() {
-		this.updatedAt = new Date();
 	}
 
 }

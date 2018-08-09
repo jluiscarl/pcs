@@ -6,8 +6,7 @@ import com.extracodigo.pcs.entity.Source;
 
 public interface SourceRepository {
 	public List<Source> getAll();
-	public Source getById();
-	public Source create(Source source);
-	public Source update(Source source);
-	public void delete();
+	public Source getById(Long id);
+	public Source saveOrUpdate(Source source);
+	public void delete(Source source);
 }
