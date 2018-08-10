@@ -2,13 +2,16 @@ package com.extracodigo.pcs.repository.generic;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.extracodigo.pcs.entity.AuditModel;
 import com.extracodigo.pcs.repository.Connection;
 
 @Repository("GenericRepository")
@@ -21,21 +24,29 @@ public abstract class GenericRepository {
 	private Session session;
 	private Transaction tx;
 	
+	private <T extends AuditModel> void initialize(T obj) {
+		Hibernate.initialize(obj.getCreatedAt());
+		Hibernate.initialize(obj.getUpdatedAt());
+	}
+	
 
-    protected <T> T saveOrUpdate(T obj) {
+    @SuppressWarnings("unchecked")
+	protected <T extends AuditModel> T saveOrUpdate(T obj) {
+    	T objResult = null;
         try {
             startOperation();
             session.saveOrUpdate(obj);
+            objResult = (T) session.load(obj.getClass(), session.getIdentifier(obj));
             tx.commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
             session.close();
         }
-        return obj;
+        return objResult;
     }
 
-    protected <T> void delete(T obj) {
+    protected <T extends AuditModel> void delete(T obj) {
         try {
             startOperation();
             session.delete(obj);
@@ -47,14 +58,20 @@ public abstract class GenericRepository {
         }
     }
 
-    protected <T> T findById(Class<T> clazz, Long id) {
+	protected <T extends AuditModel> T findById(Class<T> clazz, Long id) {
         T obj = null;
         try {
             startOperation();
             obj = session.load(clazz, id);
+            initialize(obj);
             tx.commit();
         } catch (HibernateException e) {
-            handleException(e);
+        	if (e instanceof ObjectNotFoundException) {
+        		obj = null;
+        		tx.rollback();
+        	} else {
+        		handleException(e);
+        	}
         } finally {
             session.close();
         }
@@ -62,7 +79,7 @@ public abstract class GenericRepository {
     }
 
 	@SuppressWarnings("unchecked")
-	protected <T> List<T> findAll(Class<T> clazz) {
+	protected <T extends AuditModel> List<T> findAll(Class<T> clazz) {
         List<T> objects = null;
         try {
             startOperation();

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,12 +21,6 @@ public class SourceRepositoryImplTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		sourceRepositoryImpl = new SourceRepositoryImpl();
-		sourceRepositoryImpl.setConnection(
-				new ConnectionImpl(
-						SourceRepositoryImplTest.class.getClassLoader().getResource("hibernate.cfg.xml").getPath()
-				)
-		);
 	}
 
 	@AfterClass
@@ -34,7 +29,12 @@ public class SourceRepositoryImplTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+		sourceRepositoryImpl = new SourceRepositoryImpl();
+		sourceRepositoryImpl.setConnection(
+				new ConnectionImpl(
+						SourceRepositoryImplTest.class.getClassLoader().getResource("hibernate.cfg.xml").getPath()
+				)
+		);
 	}
 
 	@After
@@ -45,26 +45,22 @@ public class SourceRepositoryImplTest {
 	public void saveOrUpdateCreateTest() {
 		//GIVE
 		Source source = new Source();
-		source.setName("Test");
-		source.setUrl("url"); 
+		source.setName(UUID.randomUUID().toString());
+		source.setUrl(UUID.randomUUID().toString()); 
 		
 		//WHEN
 		Source result = sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//THEN
 		assertNotNull(result);
-		assertSame(result, source);
 		assertNotNull(result.getId());
+		assertTrue(result.getId() instanceof Long);
 		assertTrue(result.getId() > 0);
-		assertNotNull(source.getId());
-		assertTrue(source.getId() > 0);
 		assertTrue(result.getId().equals(source.getId()));
 		assertTrue(result.getName().equals(source.getName()));
 		assertTrue(result.getUrl().equals(source.getUrl()));
 		assertNotNull(result.getCreatedAt());
 		assertNotNull(result.getUpdatedAt());
-		assertTrue(result.getCreatedAt().equals(source.getCreatedAt()));
-		assertTrue(result.getUpdatedAt().equals(source.getUpdatedAt()));
 	}
 	
 	@Test(expected = Exception.class)
@@ -82,7 +78,7 @@ public class SourceRepositoryImplTest {
 	public void saveOrUpdateCreateWithoutNameTest() {
 		//GIVE
 		Source source = new Source();
-		source.setUrl("url");
+		source.setUrl(UUID.randomUUID().toString());
 		
 		//WHEN
 		sourceRepositoryImpl.saveOrUpdate(source);		
@@ -94,7 +90,7 @@ public class SourceRepositoryImplTest {
 	public void saveOrUpdateCreateWithoutUrlTest() {
 		//GIVE
 		Source source = new Source();
-		source.setName("name");
+		source.setName(UUID.randomUUID().toString());
 		
 		//WHEN
 		sourceRepositoryImpl.saveOrUpdate(source);		
@@ -116,45 +112,46 @@ public class SourceRepositoryImplTest {
 	@Test
 	public void saveOrUpdateUpdateTest() {
 		//GIVE
+		String nameOld = UUID.randomUUID().toString();
+		String urlOld = UUID.randomUUID().toString();
+		
 		Source source = new Source();
-		source.setName("Test");
-		source.setUrl("url");
+		source.setName(nameOld);
+		source.setUrl(urlOld);
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
-		String nameUpdate = "Test update";
-		Date updatedAt = source.getUpdatedAt();
+		String nameUpdated = UUID.randomUUID().toString();
+		String urlUpdated = UUID.randomUUID().toString();
+		Date dateOld = source.getUpdatedAt();
 		
-		source.setName(nameUpdate);
-		
-		
+		source.setName(nameUpdated);
+		source.setUrl(urlUpdated);
 		
 		//WHEN
 		Source result = sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//THEN
 		assertNotNull(result);
-		assertSame(result, source);
 		assertNotNull(result.getId());
+		assertTrue(result.getId() instanceof Long);
 		assertTrue(result.getId() > 0);
-		assertNotNull(source.getId());
-		assertTrue(source.getId() > 0);
 		assertTrue(result.getId().equals(source.getId()));
-		assertTrue(result.getName().equals(nameUpdate));
-		assertTrue(result.getName().equals(source.getName()));
-		assertTrue(result.getUrl().equals(source.getUrl()));
+		assertTrue(result.getName().equals(nameUpdated));
+		assertTrue(result.getUrl().equals(urlUpdated));
+		assertFalse(result.getName().equals(nameOld));
+		assertFalse(result.getUrl().equals(urlOld));
 		assertNotNull(result.getCreatedAt());
 		assertNotNull(result.getUpdatedAt());
 		assertTrue(result.getCreatedAt().equals(source.getCreatedAt()));
-		assertTrue(result.getUpdatedAt().equals(source.getUpdatedAt()));
-		assertFalse(result.getUpdatedAt().toString().equals(updatedAt));
+		assertFalse(result.getUpdatedAt().equals(dateOld));
 	}
 
 	@Test	
 	public void getByIdTest() {
 		//GIVE
 		Source source = new Source();
-		source.setName("Test");
-		source.setUrl("url");
+		source.setName(UUID.randomUUID().toString());
+		source.setUrl(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//WHEN
@@ -165,14 +162,11 @@ public class SourceRepositoryImplTest {
 		assertNotNull(result.getId());
 		assertNotNull(result.getCreatedAt());
 		assertNotNull(result.getUpdatedAt());
+		assertTrue(result.getId() instanceof Long);
 		assertTrue(result.getId() > 0);
-		assertNotNull(source.getId());
-		assertTrue(source.getId() > 0);
 		assertTrue(result.getId().equals(source.getId()));
 		assertTrue(result.getName().equals(source.getName()));
 		assertTrue(result.getUrl().equals(source.getUrl()));
-		assertTrue(result.getCreatedAt().equals(source.getCreatedAt()));
-		assertTrue(result.getUpdatedAt().equals(source.getUpdatedAt()));
 	}
 
 	@Test
@@ -190,8 +184,8 @@ public class SourceRepositoryImplTest {
 	public void getAllTest() {
 		//GIVE
 		Source source = new Source();
-		source.setName("Test");
-		source.setUrl("url");
+		source.setName(UUID.randomUUID().toString());
+		source.setUrl(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//WHEN
@@ -199,22 +193,18 @@ public class SourceRepositoryImplTest {
 		
 		//THEN
 		assertNotNull(results);
-		assertTrue(results.isEmpty());
+		assertFalse(results.isEmpty());
 		assertTrue(results.size() == 1);
 		Source result = results.get(0);
 			assertNotNull(result);
-			assertSame(result, source);
 			assertNotNull(result.getId());
 			assertNotNull(result.getCreatedAt());
 			assertNotNull(result.getUpdatedAt());
+			assertTrue(result.getId() instanceof Long);
 			assertTrue(result.getId() > 0);
-			assertNotNull(source.getId());
-			assertTrue(source.getId() > 0);
 			assertTrue(result.getId().equals(source.getId()));
 			assertTrue(result.getName().equals(source.getName()));
 			assertTrue(result.getUrl().equals(source.getUrl()));
-			assertTrue(result.getCreatedAt().equals(source.getCreatedAt()));
-			assertTrue(result.getUpdatedAt().equals(source.getUpdatedAt()));
 		
 	}
 	
@@ -230,4 +220,22 @@ public class SourceRepositoryImplTest {
 		assertTrue(results.isEmpty());
 		
 	}
+	
+	@Test
+	public void deleteTest() {
+		//GIVE
+		Source source = new Source();
+		source.setName(UUID.randomUUID().toString());
+		source.setUrl(UUID.randomUUID().toString());
+		sourceRepositoryImpl.saveOrUpdate(source);
+		
+		//WHEN
+		sourceRepositoryImpl.delete(source);
+		Source result = sourceRepositoryImpl.getById(source.getId());
+		
+		//THEN
+		assertNull(result);
+	}
+	
+	
 }
