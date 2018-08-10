@@ -53,10 +53,10 @@ public class Source extends AuditModel  {
 	@Override
 	public String toString() {
 		return "Source{"
-				+ "id:'"+this.getId()+"'"
-				+ "name:'"+this.getName()+"'"
-				+ "url:'"+this.getUrl()+"'"
-				+ "createAt:'"+this.getCreatedAt()+"'"
+				+ "id:'"+this.getId()+"', "
+				+ "name:'"+this.getName()+"', "
+				+ "url:'"+this.getUrl()+"', "
+				+ "createAt:'"+this.getCreatedAt()+"', "
 				+ "updatedAt:'"+this.getUpdatedAt()+"'}";
 	}
 

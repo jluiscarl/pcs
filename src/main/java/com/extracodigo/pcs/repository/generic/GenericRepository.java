@@ -30,20 +30,17 @@ public abstract class GenericRepository {
 	}
 	
 
-    @SuppressWarnings("unchecked")
 	protected <T extends AuditModel> T saveOrUpdate(T obj) {
-    	T objResult = null;
         try {
             startOperation();
             session.saveOrUpdate(obj);
-            objResult = (T) session.load(obj.getClass(), session.getIdentifier(obj));
             tx.commit();
         } catch (HibernateException e) {
             handleException(e);
         } finally {
             session.close();
         }
-        return objResult;
+        return obj;
     }
 
     protected <T extends AuditModel> void delete(T obj) {

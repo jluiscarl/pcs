@@ -12,7 +12,6 @@ import com.extracodigo.pcs.repository.generic.GenericRepository;
 @Repository("sourceRepositoryHibernate")
 public class SourceRepositoryImpl extends GenericRepository implements SourceRepository {
 	
-
 	@Override
 	public List<Source> getAll() {
 		return super.findAll(Source.class);

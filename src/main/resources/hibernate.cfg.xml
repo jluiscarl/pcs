@@ -16,5 +16,6 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.extracodigo.pcs.entity.Source" />
+        <mapping class="com.extracodigo.pcs.entity.Post" />
     </session-factory>
 </hibernate-configuration>

@@ -1,11 +1,38 @@
 package com.extracodigo.pcs.entity;
 
-public class Post {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table(name="posts")
+public class Post extends AuditModel {
+
+	private static final long serialVersionUID = 5970296457710940462L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	@NotBlank
 	private String title;
+	
+	@NotBlank
 	private String description;
+	
+	@NotBlank
 	private String urlToImage;
+	
+	@NotBlank
 	private String url;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Source source;
 	
 	public Post () {}
@@ -56,5 +83,18 @@ public class Post {
 
 	public void setSource(Source source) {
 		this.source = source;
+	}
+	
+	@Override
+	public String toString() {
+		return "Post{"
+				+ "id:'"+this.getId()+"', "
+				+ "title:'"+this.getTitle()+"', "
+				+ "description:'"+this.getDescription()+"', "
+				+ "urlToImg:'"+this.getUrlToImage()+"', "
+				+ "url:'"+this.getUrl()+"', "
+				+ "source:'"+this.getSource()+"', "
+				+ "createAt:'"+this.getCreatedAt()+"', "
+				+ "updatedAt:'"+this.getUpdatedAt()+"'}";
 	}
 }

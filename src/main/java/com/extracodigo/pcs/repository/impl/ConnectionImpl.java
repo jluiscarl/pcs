@@ -7,6 +7,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import com.extracodigo.pcs.entity.Post;
 import com.extracodigo.pcs.entity.Source;
 import com.extracodigo.pcs.repository.Connection;
 
@@ -21,6 +22,7 @@ public class ConnectionImpl implements Connection{
     	Configuration configuration = new Configuration();
     	configuration = (configurationFile.equals("")) ? configuration.configure() : configuration.configure(configurationFile); 
         configuration.addAnnotatedClass(Source.class);
+        configuration.addAnnotatedClass(Post.class);
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                 configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
