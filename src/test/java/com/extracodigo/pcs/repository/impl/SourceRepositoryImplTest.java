@@ -237,5 +237,14 @@ public class SourceRepositoryImplTest {
 		assertNull(result);
 	}
 	
+	@Test(expected=Exception.class)
+	public void deleteBySourceNullTest() {
+		//GIVE
+		
+		//WHEN
+		sourceRepositoryImpl.delete(null);
+		
+		//THEN
+	}
 	
 }

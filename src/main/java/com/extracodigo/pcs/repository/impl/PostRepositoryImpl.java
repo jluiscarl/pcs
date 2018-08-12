@@ -2,6 +2,7 @@ package com.extracodigo.pcs.repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import com.extracodigo.pcs.entity.Post;
@@ -18,7 +19,9 @@ public class PostRepositoryImpl extends GenericRepository implements PostReposit
 
 	@Override
 	public Post getById(Long id) {
-		return super.findById(Post.class, id);
+		Post result = super.findById(Post.class, id);
+		if (result != null) Hibernate.initialize(result.getSource());
+		return result;
 	}
 
 	@Override

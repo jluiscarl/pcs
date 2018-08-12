@@ -32,7 +32,7 @@ public class Post extends AuditModel {
 	@NotBlank
 	private String url;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
 	private Source source;
 	
 	public Post () {}
