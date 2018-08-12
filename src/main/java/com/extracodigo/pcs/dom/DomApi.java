@@ -1,5 +1,10 @@
 package com.extracodigo.pcs.dom;
 
-public interface DomApi {
+import java.util.List;
 
+import com.extracodigo.pcs.entity.Post;
+import com.extracodigo.pcs.entity.Source;
+
+public interface DomApi {
+	public List<Post> buildPostBySource(Source source);
 }
