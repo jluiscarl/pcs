@@ -47,6 +47,11 @@ public class SourceRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString()); 
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString()); 
 		
 		//WHEN
 		Source result = sourceRepositoryImpl.saveOrUpdate(source);
@@ -59,6 +64,11 @@ public class SourceRepositoryImplTest {
 		assertTrue(result.getId().equals(source.getId()));
 		assertTrue(result.getName().equals(source.getName()));
 		assertTrue(result.getUrl().equals(source.getUrl()));
+		assertTrue(result.getSelectorContainer().equals(source.getSelectorContainer()));
+		assertTrue(result.getSelectorContent().equals(source.getSelectorContent()));
+		assertTrue(result.getSelectorTitle().equals(source.getSelectorTitle()));
+		assertTrue(result.getSelectorDescription().equals(source.getSelectorDescription()));
+		assertTrue(result.getSelectorImg().equals(source.getSelectorImg()));
 		assertNotNull(result.getCreatedAt());
 		assertNotNull(result.getUpdatedAt());
 	}
@@ -117,7 +127,12 @@ public class SourceRepositoryImplTest {
 		
 		Source source = new Source();
 		source.setName(nameOld);
-		source.setUrl(urlOld);
+		source.setUrl(urlOld); 
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		String nameUpdated = UUID.randomUUID().toString();
@@ -151,7 +166,12 @@ public class SourceRepositoryImplTest {
 		//GIVE
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
-		source.setUrl(UUID.randomUUID().toString());
+		source.setUrl(UUID.randomUUID().toString()); 
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//WHEN
@@ -167,6 +187,11 @@ public class SourceRepositoryImplTest {
 		assertTrue(result.getId().equals(source.getId()));
 		assertTrue(result.getName().equals(source.getName()));
 		assertTrue(result.getUrl().equals(source.getUrl()));
+		assertTrue(result.getSelectorContainer().equals(source.getSelectorContainer()));
+		assertTrue(result.getSelectorContent().equals(source.getSelectorContent()));
+		assertTrue(result.getSelectorTitle().equals(source.getSelectorTitle()));
+		assertTrue(result.getSelectorDescription().equals(source.getSelectorDescription()));
+		assertTrue(result.getSelectorImg().equals(source.getSelectorImg()));
 	}
 
 	@Test
@@ -185,7 +210,12 @@ public class SourceRepositoryImplTest {
 		//GIVE
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
-		source.setUrl(UUID.randomUUID().toString());
+		source.setUrl(UUID.randomUUID().toString()); 
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//WHEN
@@ -205,6 +235,11 @@ public class SourceRepositoryImplTest {
 			assertTrue(result.getId().equals(source.getId()));
 			assertTrue(result.getName().equals(source.getName()));
 			assertTrue(result.getUrl().equals(source.getUrl()));
+			assertTrue(result.getSelectorContainer().equals(source.getSelectorContainer()));
+			assertTrue(result.getSelectorContent().equals(source.getSelectorContent()));
+			assertTrue(result.getSelectorTitle().equals(source.getSelectorTitle()));
+			assertTrue(result.getSelectorDescription().equals(source.getSelectorDescription()));
+			assertTrue(result.getSelectorImg().equals(source.getSelectorImg()));
 		
 	}
 	
@@ -227,6 +262,11 @@ public class SourceRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		//WHEN

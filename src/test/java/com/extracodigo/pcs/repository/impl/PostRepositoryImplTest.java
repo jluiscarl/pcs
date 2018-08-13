@@ -64,6 +64,11 @@ public class PostRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		
 		Post post = new Post();
 		post.setTitle(UUID.randomUUID().toString());
@@ -218,6 +223,11 @@ public class PostRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		
 		String titleOld = UUID.randomUUID().toString();
 		
@@ -265,6 +275,11 @@ public class PostRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		sourceRepositoryImpl.saveOrUpdate(source);
 		
 		
@@ -301,6 +316,11 @@ public class PostRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		
 		Post post = new Post();
 		post.setTitle(UUID.randomUUID().toString());
@@ -346,6 +366,11 @@ public class PostRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		
 		Post post = new Post();
 		post.setTitle(UUID.randomUUID().toString());
@@ -398,6 +423,11 @@ public class PostRepositoryImplTest {
 		Source source = new Source();
 		source.setName(UUID.randomUUID().toString());
 		source.setUrl(UUID.randomUUID().toString());
+		source.setSelectorContainer(UUID.randomUUID().toString()); 
+		source.setSelectorContent(UUID.randomUUID().toString()); 
+		source.setSelectorTitle(UUID.randomUUID().toString()); 
+		source.setSelectorDescription(UUID.randomUUID().toString()); 
+		source.setSelectorImg(UUID.randomUUID().toString());
 		
 		Post post = new Post();
 		post.setTitle(UUID.randomUUID().toString());
