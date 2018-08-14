@@ -40,6 +40,7 @@ public abstract class GenericRepository {
         } finally {
             session.close();
         }
+        System.out.println("despues" + obj);
         return obj;
     }
 

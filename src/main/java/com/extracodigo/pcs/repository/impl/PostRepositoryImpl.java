@@ -26,6 +26,7 @@ public class PostRepositoryImpl extends GenericRepository implements PostReposit
 
 	@Override
 	public Post saveOrUpdate(Post post) {
+		System.out.println(post);
 		return super.saveOrUpdate(post);
 	}
 

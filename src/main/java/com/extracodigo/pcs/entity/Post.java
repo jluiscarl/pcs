@@ -58,7 +58,7 @@ public class Post extends AuditModel {
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = (description.length() > 140) ? description.substring(0,140) : description;
 	}
 
 	public String getUrlToImage() {
