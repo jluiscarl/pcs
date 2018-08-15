@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.extracodigo.pcs.controller.DomApi;
 import com.extracodigo.pcs.entity.Post;
 import com.extracodigo.pcs.entity.Source;
+import com.extracodigo.pcs.helper.OAuth2GoogleApiConnection;
 import com.extracodigo.pcs.rest.PostRestController;
 import com.extracodigo.pcs.service.PostService;
 import com.extracodigo.pcs.service.SourceService;
@@ -51,7 +52,8 @@ public class PostRestControllerImpl implements PostRestController {
 	@Override
 	@RequestMapping(path="/publish", method=RequestMethod.POST)
 	public void publish() {
-		
+		logger.info("publish()");
+		OAuth2GoogleApiConnection.Oauth2Connect();
 	}
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
