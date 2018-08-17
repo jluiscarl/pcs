@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.extracodigo.pcs.entity.AuditModel;
+import com.extracodigo.pcs.entity.Post;
 import com.extracodigo.pcs.repository.Connection;
 
 @Repository("GenericRepository")
@@ -21,8 +22,8 @@ public abstract class GenericRepository {
 	@Qualifier("ConnectionImpl")
 	private Connection connection;
 	
-	private Session session;
-	private Transaction tx;
+	protected Session session;
+	protected Transaction tx;
 	
 	private <T extends AuditModel> void initialize(T obj) {
 		Hibernate.initialize(obj.getCreatedAt());
@@ -40,7 +41,6 @@ public abstract class GenericRepository {
         } finally {
             session.close();
         }
-        System.out.println("despues" + obj);
         return obj;
     }
 

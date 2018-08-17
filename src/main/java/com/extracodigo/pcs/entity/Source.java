@@ -1,11 +1,13 @@
 package com.extracodigo.pcs.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -19,24 +21,38 @@ public class Source extends AuditModel  {
 	private Long id;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="name")
 	private String name;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="url", unique=true)
 	private String url;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="selector_container")
 	private String selectorContainer;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="selector_title")
 	private String selectorTitle;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="selector_content")
 	private String selectorContent;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="selector_img")
 	private String selectorImg;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="selector_description")
 	private String selectorDescription;
 	
 	public Source () {}

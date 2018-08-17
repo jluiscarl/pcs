@@ -46,4 +46,9 @@ public class PostServiceImpl implements PostService {
 		this.postRepository = postRepository;
 	}
 
+	@Override
+	public List<Post> getByPublished(Boolean published) {
+		return postRepository.getByPublished(published);
+	}
+
 }

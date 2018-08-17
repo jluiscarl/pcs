@@ -1,6 +1,7 @@
 package com.extracodigo.pcs.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="posts")
@@ -21,16 +23,25 @@ public class Post extends AuditModel {
 	private Long id;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="title")
 	private String title;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="description")
 	private String description;
 	
-	@NotBlank
+	@Column(name="url_to_img", nullable=true)
 	private String urlToImage;
 	
 	@NotBlank
+	@NotNull
+	@Column(name="url")
 	private String url;
+	
+	@Column(name="published")
+	private Boolean published = false;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, optional=false)
 	private Source source;
@@ -77,6 +88,14 @@ public class Post extends AuditModel {
 		this.url = url;
 	}
 	
+	public Boolean getPublished() {
+		return published;
+	}
+
+	public void setPublished(Boolean published) {
+		this.published = published;
+	}
+	
 	public Source getSource() {
 		return source;
 	}
@@ -93,6 +112,7 @@ public class Post extends AuditModel {
 				+ "description:'"+this.getDescription()+"', "
 				+ "urlToImg:'"+this.getUrlToImage()+"', "
 				+ "url:'"+this.getUrl()+"', "
+				+ "published:'"+this.getPublished()+"', "
 				+ "source:'"+this.getSource()+"', "
 				+ "createAt:'"+this.getCreatedAt()+"', "
 				+ "updatedAt:'"+this.getUpdatedAt()+"'}";

@@ -3,6 +3,7 @@ package com.extracodigo.pcs.repository.impl;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Repository;
 
 import com.extracodigo.pcs.entity.Post;
@@ -26,13 +27,30 @@ public class PostRepositoryImpl extends GenericRepository implements PostReposit
 
 	@Override
 	public Post saveOrUpdate(Post post) {
-		System.out.println(post);
 		return super.saveOrUpdate(post);
 	}
 
 	@Override
 	public void delete(Post post) {
 		super.delete(post);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Post> getByPublished(Boolean published) {
+		List<Post> posts = null;
+        try {
+            super.startOperation();
+            posts = super.session.createQuery("from " + Post.class.getName() + " where published = :published")
+            									.setParameter("published", published)
+            									.getResultList();
+            tx.commit();
+        } catch (HibernateException e) {
+            super.handleException(e);
+        } finally {
+            session.close();
+        }
+        return posts;
 	}
 
 }

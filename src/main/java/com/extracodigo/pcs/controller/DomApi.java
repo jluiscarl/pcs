@@ -7,4 +7,5 @@ import com.extracodigo.pcs.entity.Source;
 
 public interface DomApi {
 	public List<Post> getPostsBySource(Source source);
+	public String getContentByPost(Post post);
 }

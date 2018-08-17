@@ -9,4 +9,5 @@ public interface PostRepository {
 	public Post getById(Long id);
 	public Post saveOrUpdate(Post post);
 	public void delete(Post post);
+	public List<Post> getByPublished(Boolean published);
 }

@@ -10,4 +10,5 @@ public interface PostService {
 	public Post getById(Long id);
 	public List<Post> getAll();
 	public void delete(Long id);
+	public List<Post> getByPublished(Boolean published);
 }

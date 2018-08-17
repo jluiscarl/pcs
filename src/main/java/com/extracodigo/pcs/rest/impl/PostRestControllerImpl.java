@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.extracodigo.pcs.controller.BloggerApi;
 import com.extracodigo.pcs.controller.DomApi;
 import com.extracodigo.pcs.entity.Post;
 import com.extracodigo.pcs.entity.Source;
-import com.extracodigo.pcs.helper.OAuth2GoogleApiConnection;
 import com.extracodigo.pcs.rest.PostRestController;
 import com.extracodigo.pcs.service.PostService;
 import com.extracodigo.pcs.service.SourceService;
@@ -34,8 +34,13 @@ public class PostRestControllerImpl implements PostRestController {
 	private DomApi domApi;
 	
 	@Autowired
+	@Qualifier("bloggerApiImpl")
+	private BloggerApi bloggerApi;
+	
+	@Autowired
 	@Qualifier("postServiceImpl")
 	private PostService postService;
+
 	
 	@Override
 	@RequestMapping(path="/build", method=RequestMethod.POST)
@@ -45,15 +50,17 @@ public class PostRestControllerImpl implements PostRestController {
 				.map((source) -> domApi.getPostsBySource(source))
 				.collect(Collectors.toList());
 		posts.stream().forEach((postList) -> {
-			postList.stream().forEach((post) -> postService.create(post));
+			postList.stream().forEach((post) -> {
+				post.setPublished(false);
+				postService.create(post);
+			});
 		});
 	}
 
 	@Override
 	@RequestMapping(path="/publish", method=RequestMethod.POST)
 	public void publish() {
-		logger.info("publish()");
-		OAuth2GoogleApiConnection.Oauth2Connect();
+		bloggerApi.post(postService.getByPublished(false));
 	}
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
