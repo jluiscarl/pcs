@@ -1,4 +1,4 @@
-package com.extracodigo.pcs.helper.impl;
+package com.extracodigo.pcs.configuration.impl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Controller;
 
-import com.extracodigo.pcs.helper.AppConfiguration;
+import com.extracodigo.pcs.configuration.AppConfiguration;
 
 @Controller("appConfigurationImpl")
 public class AppConfigurationImpl implements AppConfiguration {

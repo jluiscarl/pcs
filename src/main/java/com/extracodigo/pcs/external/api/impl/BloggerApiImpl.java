@@ -1,4 +1,4 @@
-package com.extracodigo.pcs.controller.impl;
+package com.extracodigo.pcs.external.api.impl;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-import com.extracodigo.pcs.controller.BloggerApi;
-import com.extracodigo.pcs.controller.DomApi;
-import com.extracodigo.pcs.controller.GoogleApiConnection;
-import com.extracodigo.pcs.helper.AppConfiguration;
+import com.extracodigo.pcs.configuration.AppConfiguration;
+import com.extracodigo.pcs.external.api.BloggerApi;
+import com.extracodigo.pcs.external.api.DomApi;
+import com.extracodigo.pcs.external.api.GoogleApiConnection;
 import com.extracodigo.pcs.service.PostService;
 import com.google.api.services.blogger.Blogger;
 import com.google.api.services.blogger.model.Post;

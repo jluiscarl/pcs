@@ -1,4 +1,4 @@
-package com.extracodigo.pcs.controller.impl;
+package com.extracodigo.pcs.external.api.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-import com.extracodigo.pcs.controller.GoogleApiConnection;
-import com.extracodigo.pcs.helper.AppConfiguration;
+import com.extracodigo.pcs.configuration.AppConfiguration;
+import com.extracodigo.pcs.external.api.GoogleApiConnection;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;

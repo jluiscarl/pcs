@@ -1,4 +1,4 @@
-package com.extracodigo.pcs.controller;
+package com.extracodigo.pcs.external.api;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.http.HttpTransport;

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.extracodigo.pcs.controller.BloggerApi;
-import com.extracodigo.pcs.controller.DomApi;
 import com.extracodigo.pcs.entity.Post;
 import com.extracodigo.pcs.entity.Source;
+import com.extracodigo.pcs.external.api.BloggerApi;
+import com.extracodigo.pcs.external.api.DomApi;
 import com.extracodigo.pcs.rest.PostRestController;
 import com.extracodigo.pcs.service.PostService;
 import com.extracodigo.pcs.service.SourceService;

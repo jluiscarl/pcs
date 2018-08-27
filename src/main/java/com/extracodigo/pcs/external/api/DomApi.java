@@ -1,4 +1,4 @@
-package com.extracodigo.pcs.controller;
+package com.extracodigo.pcs.external.api;
 
 import java.util.List;
 

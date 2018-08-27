@@ -1,4 +1,4 @@
-package com.extracodigo.pcs.helper;
+package com.extracodigo.pcs.configuration;
 
 public interface AppConfiguration {
 	
